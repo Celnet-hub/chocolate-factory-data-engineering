@@ -2,3 +2,4 @@ pydantic-settings
 kagglehub
 pandas
 sqlalchemy
+psycopg2-binary

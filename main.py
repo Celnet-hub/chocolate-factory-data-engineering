@@ -1,4 +1,4 @@
-from CAPSTONE_PROJECT_II.extract_load_raw import start_process
+from extract_load_raw import start_process
 
 if __name__ == "__main__":
     print("--- Starting ETL Pipeline ---")

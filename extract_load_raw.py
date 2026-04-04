@@ -1,7 +1,7 @@
 import kagglehub
 import pandas as pd
 from pathlib import Path
-from sqlalchemy import create_engine
+from db_conn import get_engine
 
 
 def get_data() -> dict:
@@ -38,10 +38,34 @@ def get_data() -> dict:
     }
 
 
-def load_data():
-    pass
+def load_data(df: dict) -> dict:
+    engine = get_engine()
+
+    # access dataframes
+    calendar_df = df["calendar"]
+    customers_df = df["customers"]
+    products_df = df["products"]
+    sales_df = df["sales"]
+    stores_df = df["stores"]
+
+    calendar_df.to_sql('calendar_raw', engine,
+                       if_exists='replace', index=False)
+
+    customers_df.to_sql('customers_raw', engine,
+                        if_exists='replace', index=False)
+
+    products_df.to_sql('products_raw', engine, schema='public',
+                       if_exists='replace', index=False)
+
+    sales_df.to_sql('sales_raw', engine, if_exists='replace', index=False)
+
+    stores_df.to_sql('stores_raw', engine, if_exists='replace', index=False)
+
+    print("Raw Data loaded")
+
 
 def start_process() -> dict:
     """Wrapper function to initiate the extraction."""
     data_frames = get_data()
+    meta = load_data(data_frames)
     return data_frames
