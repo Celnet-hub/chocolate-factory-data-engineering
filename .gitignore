@@ -1,0 +1,5 @@
+.env
+Classwork/
+source_data/
+__pycache__/
+venv/
