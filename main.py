@@ -6,7 +6,7 @@ if __name__ == "__main__":
     # Extract
     raw_data = start_process()
     
-    # 2. Transform (Coming next)
+    # Transform
     # clean_data = clean_data(raw_data)
     
-    print("--- Pipeline Execution Complete ---")
+    print("Pipeline Execution Complete")
