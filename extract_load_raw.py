@@ -38,9 +38,10 @@ def get_data() -> dict:
     }
 
 
-def load_data(df: dict) -> dict:
+def load_data(df: dict) -> None:
     engine = get_engine()
 
+    print("Staging data to db")
     # access dataframes
     calendar_df = df["calendar"]
     customers_df = df["customers"]
@@ -61,11 +62,11 @@ def load_data(df: dict) -> dict:
 
     stores_df.to_sql('stores_raw', engine, if_exists='replace', index=False)
 
-    print("Raw Data loaded")
+    print("Raw Data Staged successfully")
 
 
 def start_process() -> dict:
     """Wrapper function to initiate the extraction."""
     data_frames = get_data()
-    meta = load_data(data_frames)
+    load_data(data_frames)
     return data_frames
